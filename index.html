@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angel Jose | Java Backend Developer</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #64748b;
+            --bg-color: #ffffff;
+            --text-color: #1e293b;
+            --card-bg: #f8fafc;
+            --border-color: #e2e8f0;
+            --header-bg: rgba(255, 255, 255, 0.8);
+            --transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] {
+            --primary-color: #60a5fa;
+            --secondary-color: #94a3b8;
+            --bg-color: #0f172a;
+            --text-color: #f1f5f9;
+            --card-bg: #1e293b;
+            --border-color: #334155;
+            --header-bg: rgba(15, 23, 42, 0.8);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: var(--transition);
+        }
+
+        /* Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: var(--header-bg);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        nav {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0.5rem;
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 6rem 2rem 2rem;
+        }
+
+        section {
+            padding: 4rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        section:last-child {
+            border-bottom: none;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        #home {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8rem 0;
+            gap: 4rem;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        .hero-image::before {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(45deg, var(--primary-color), #8b5cf6);
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.2;
+            z-index: -1;
+            animation: pulse 10s infinite alternate;
+        }
+
+        @keyframes pulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.1); }
+        }
+
+        .image-container {
+            position: relative;
+            padding: 12px;
+            background: linear-gradient(45deg, var(--primary-color), #8b5cf6, #ec4899, var(--primary-color));
+            background-size: 300% 300%;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 40px rgba(139, 92, 246, 0.6);
+            animation: gradientBorder 5s ease infinite;
+        }
+
+        @keyframes gradientBorder {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hero-image img {
+            width: 350px;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 8px solid var(--bg-color);
+            transition: var(--transition);
+        }
+
+        .image-container:hover img {
+            transform: scale(1.05);
+        }
+
+        #home h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        #home p {
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category h3 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background-color: var(--card-bg);
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            border: 1px solid var(--border-color);
+            font-size: 0.9rem;
+        }
+
+        /* Experience & Projects */
+        .card {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 1rem;
+            border: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .card .subtitle {
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Contact */
+        #contact .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .contact-item h4 {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 4rem 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--secondary-color);
+        }
+
+        /* Animations */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .typing-text {
+            border-right: 3px solid var(--primary-color);
+            padding-right: 5px;
+            animation: blink 0.75s step-end infinite;
+            display: inline-block;
+        }
+
+        @keyframes blink {
+            from, to { border-color: transparent }
+            50% { border-color: var(--primary-color) }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            #home {
+                flex-direction: column-reverse;
+                text-align: center;
+                padding: 6rem 0 2rem;
+                gap: 2rem;
+            }
+            #home h1 {
+                font-size: 2.5rem;
+            }
+            .hero-image img {
+                width: 250px;
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">AJ.</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#certifications">Certifications</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="theme-toggle" id="theme-toggle">🌓</button>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home">
+            <div class="hero-content">
+                <h1 id="hero-name"></h1>
+                <p id="hero-title"></p>
+                <a href="#contact" class="btn">Get In Touch</a>
+            </div>
+            <div class="hero-image">
+                <div class="image-container">
+                    <img src="Angel.jpeg" alt="Angel Jose">
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <h2>About Me</h2>
+            <p id="about-text"></p>
+        </section>
+
+        <section id="skills">
+            <h2>Technical Skills</h2>
+            <div class="skills-grid" id="skills-container"></div>
+        </section>
+
+        <section id="experience">
+            <h2>Work Experience</h2>
+            <div id="experience-container"></div>
+        </section>
+
+        <section id="education">
+            <h2>Education</h2>
+            <div id="education-container"></div>
+        </section>
+
+        <section id="certifications">
+            <h2>Certifications & Awards</h2>
+            <div id="certifications-container" class="certifications-list"></div>
+        </section>
+
+        <section id="projects">
+            <h2>Projects</h2>
+            <div id="projects-container"></div>
+        </section>
+
+        <section id="contact">
+            <h2>Contact Information</h2>
+            <div class="contact-info" id="contact-container"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; <span id="year"></span> Angel Jose. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const portfolioData = {
+            personalInfo: {
+                name: "Angel Jose",
+                title: "Java Backend Developer",
+                email: "angeljose80808@gmail.com",
+                phone: "+91 81293 79095",
+                address: "Devanahalli, Bangalore",
+                linkedin: "https://www.linkedin.com/in/angel-jose--",
+                about: "Motivated Computer Applications graduate with hands-on experience in Python, Java, Django, SQL, HTML/CSS, and Spring Boot. Skilled in software development, database management, and teamwork. Eager to contribute to innovative IT projects and grow in a dynamic work environment."
+            },
+            skills: {
+                "Frontend": ["HTML", "CSS", "JavaScript", "Restful APIs"],
+                "Backend": ["Java", "Python", "Django", "SQL", "RDBMS", "Spring Boot"]
+            },
+            experience: [
+                {
+                    title: "Java Spring Boot Intern",
+                    company: "LUMINAR TECHNOLAB",
+                    location: "KOCHI, INDIA",
+                    dates: "AUG 2024 – DEC 2024",
+                    description: "Gained practical experience in Java Spring Boot development. Worked on backend development and RESTful APIs. Collaborated in Agile team environment."
+                },
+                {
+                    title: "English and Computer Teacher",
+                    company: "Innovators International School",
+                    location: "Bangalore",
+                    dates: "AUG 2025 - APR 2026",
+                    description: "Actively contributed to student academic development, classroom management, student discipline, maintained proper lessons plans."
+                }
+            ],
+            projects: [
+                { 
+                    title: 'BlossomBiz - Flower Mart App', 
+                    date: 'October 2024',
+                    description: 'Developed a Servlet-based application using Eclipse, HTML, RDBMS, and SQL. Implemented inventory management, order processing, billing, and real-time invoicing features.', 
+                    link: '#' 
+                },
+                { 
+                    title: 'Job Quest - Job Finding App', 
+                    date: 'August 2023 – February 2024',
+                    description: 'Built using Python, HTML, CSS, and Django framework. Successfully completed as an internship project at Techmindz. Enabled job search and candidate-employer matching functionalities.', 
+                    link: '#' 
+                }
+            ],
+            education: [
+                {
+                    degree: "Bachelor of Computer Applications",
+                    institution: "Sahrdaya College of Advanced Studies, Kodakara",
+                    dates: "August 2021 – August 2024",
+                    location: "Thrissur, India"
+                },
+                {
+                    degree: "Grade 12 – 75.2%",
+                    institution: "Gulf Indian School",
+                    dates: "August 2020 – August 2021",
+                    location: "Kuwait"
+                },
+                {
+                    degree: "Grade 10 - 75.6%",
+                    institution: "Gulf Indian School",
+                    dates: "August 2018 – August 2019",
+                    location: "Kuwait"
+                }
+            ],
+            certifications: [
+                { title: "Learning Data Analytics: Foundations", issuer: "LinkedIn Learning", date: "April 10, 2025" },
+                { title: "Introduction to Career Skills in Data Analytics", issuer: "LinkedIn Learning", date: "April 3, 2025" },
+                { title: "TCS iON NQT", issuer: "Scored 67%", date: "March 2025" },
+                { title: "TCS iON Career Edge - Young Professional Course", issuer: "TCS iON", date: "August 13, 2024" },
+                { title: "Certified Course in IoT - Advanced Level", issuer: "Certification", date: "February 19, 2024" },
+                { title: "Certified Course in Cyber Security", issuer: "Certification", date: "November 9, 2023" },
+                { title: "Certified Course in IoT - Beginner", issuer: "Certification", date: "September 12, 2022" }
+            ]
+        };
+
+        function init() {
+            // Personal Info
+            document.getElementById('hero-name').textContent = portfolioData.personalInfo.name;
+            
+            // Dynamic Typing Effect
+            const heroTitle = document.getElementById('hero-title');
+            const text = portfolioData.personalInfo.title;
+            let i = 0;
+            heroTitle.innerHTML = '<span class="typing-text"></span>';
+            const typingSpan = heroTitle.querySelector('.typing-text');
+            
+            function type() {
+                if (i < text.length) {
+                    typingSpan.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(type, 100);
+                }
+            }
+            type();
+
+            document.getElementById('about-text').textContent = portfolioData.personalInfo.about;
+            document.getElementById('year').textContent = new Date().getFullYear();
+
+            // Skills
+            const skillsContainer = document.getElementById('skills-container');
+            for (const [category, skills] of Object.entries(portfolioData.skills)) {
+                const div = document.createElement('div');
+                div.className = 'skill-category animate-on-scroll';
+                div.innerHTML = `
+                    <h3>${category}</h3>
+                    <div class="skill-tags">
+                        ${skills.map(skill => `<span class="skill-tag">${skill}</span>`).join('')}
+                    </div>
+                `;
+                skillsContainer.appendChild(div);
+            }
+
+            // Experience
+            const expContainer = document.getElementById('experience-container');
+            portfolioData.experience.forEach(exp => {
+                const div = document.createElement('div');
+                div.className = 'card animate-on-scroll';
+                div.innerHTML = `
+                    <h3>${exp.title}</h3>
+                    <div class="subtitle">
+                        <span>${exp.company} | ${exp.location}</span>
+                        <span>${exp.dates}</span>
+                    </div>
+                    <p>${exp.description}</p>
+                `;
+                expContainer.appendChild(div);
+            });
+
+            // Education
+            const eduContainer = document.getElementById('education-container');
+            portfolioData.education.forEach(edu => {
+                const div = document.createElement('div');
+                div.className = 'card animate-on-scroll';
+                div.innerHTML = `
+                    <h3>${edu.degree}</h3>
+                    <div class="subtitle">
+                        <span>${edu.institution} | ${edu.location}</span>
+                        <span>${edu.dates}</span>
+                    </div>
+                `;
+                eduContainer.appendChild(div);
+            });
+
+            // Certifications
+            const certContainer = document.getElementById('certifications-container');
+            portfolioData.certifications.forEach(cert => {
+                const div = document.createElement('div');
+                div.className = 'card animate-on-scroll';
+                div.style.marginBottom = '1rem';
+                div.innerHTML = `
+                    <h3 style="font-size: 1.2rem;">${cert.title}</h3>
+                    <div class="subtitle">
+                        <span>${cert.issuer}</span>
+                        <span>${cert.date}</span>
+                    </div>
+                `;
+                certContainer.appendChild(div);
+            });
+
+            // Projects
+            const projectsContainer = document.getElementById('projects-container');
+            portfolioData.projects.forEach(project => {
+                const div = document.createElement('div');
+                div.className = 'card animate-on-scroll';
+                div.innerHTML = `
+                    <h3>${project.title}</h3>
+                    <div class="subtitle">
+                        <span>${project.date}</span>
+                    </div>
+                    <p>${project.description}</p>
+                `;
+                projectsContainer.appendChild(div);
+            });
+
+            // Contact
+            const contactContainer = document.getElementById('contact-container');
+            const contactItems = [
+                { label: 'Email', value: portfolioData.personalInfo.email, link: `mailto:${portfolioData.personalInfo.email}` },
+                { label: 'Phone', value: portfolioData.personalInfo.phone, link: `tel:${portfolioData.personalInfo.phone}` },
+                { label: 'LinkedIn', value: 'Connect on LinkedIn', link: portfolioData.personalInfo.linkedin },
+                { label: 'Location', value: portfolioData.personalInfo.address, link: '#' }
+            ];
+            
+            contactItems.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'contact-item animate-on-scroll';
+                div.innerHTML = `
+                    <h4>${item.label}</h4>
+                    <p><a href="${item.link}" style="color: inherit; text-decoration: none;">${item.value}</a></p>
+                `;
+                contactContainer.appendChild(div);
+            });
+
+            // Theme Toggle
+            const themeToggle = document.getElementById('theme-toggle');
+            const currentTheme = localStorage.getItem('theme');
+            
+            if (currentTheme) {
+                document.documentElement.setAttribute('data-theme', currentTheme);
+            }
+
+            themeToggle.addEventListener('click', () => {
+                let theme = document.documentElement.getAttribute('data-theme');
+                if (theme === 'dark') {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('theme', 'dark');
+                }
+            });
+
+            // Scroll Animation Logic
+            const observerOptions = {
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+            document.querySelectorAll('section').forEach(el => {
+                el.classList.add('animate-on-scroll');
+                observer.observe(el);
+            });
+        }
+
+        window.onload = init;
+    </script>
+</body>
+</html>
