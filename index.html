@@ -409,7 +409,7 @@
         const portfolioData = {
             personalInfo: {
                 name: "Angel Jose",
-                title: "Java Backend Developer",
+                titles: ["Java Developer", "Python Developer", "Database Management Expert", "Cyber Security", "Web Developer"],
                 email: "angeljose80808@gmail.com",
                 phone: "+91 81293 79095",
                 address: "Devanahalli, Bangalore",
@@ -487,17 +487,35 @@
             
             // Dynamic Typing Effect
             const heroTitle = document.getElementById('hero-title');
-            const text = portfolioData.personalInfo.title;
-            let i = 0;
+            let titleIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
             heroTitle.innerHTML = '<span class="typing-text"></span>';
             const typingSpan = heroTitle.querySelector('.typing-text');
             
             function type() {
-                if (i < text.length) {
-                    typingSpan.textContent += text.charAt(i);
-                    i++;
-                    setTimeout(type, 100);
+                const currentTitle = portfolioData.personalInfo.titles[titleIndex];
+                
+                if (isDeleting) {
+                    typingSpan.textContent = currentTitle.substring(0, charIndex - 1);
+                    charIndex--;
+                } else {
+                    typingSpan.textContent = currentTitle.substring(0, charIndex + 1);
+                    charIndex++;
                 }
+
+                let typeSpeed = isDeleting ? 50 : 100;
+
+                if (!isDeleting && charIndex === currentTitle.length) {
+                    isDeleting = true;
+                    typeSpeed = 2000; // Pause at end
+                } else if (isDeleting && charIndex === 0) {
+                    isDeleting = false;
+                    titleIndex = (titleIndex + 1) % portfolioData.personalInfo.titles.length;
+                    typeSpeed = 500;
+                }
+
+                setTimeout(type, typeSpeed);
             }
             type();
 
